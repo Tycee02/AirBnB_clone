@@ -23,4 +23,3 @@ class Review(BaseModel):
             self.user_id = kwargs['user_id']
         if 'text' in kwargs:
             self.text = kwargs['text']
-        
