@@ -2,6 +2,7 @@
 """state.py"""
 from models.base_model import BaseModel
 
+
 class State(BaseModel):
     """
     The state class inherit from Basemodel
@@ -17,4 +18,3 @@ class State(BaseModel):
     super().__init__(*args, **kwargs)
     if 'name' in kwargs:
         self.name = kwargs['name']
-        
