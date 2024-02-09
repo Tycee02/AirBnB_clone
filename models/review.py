@@ -16,6 +16,7 @@ class Review(BaseModel):
         """
         Initializing with args and kwargs
         """
+        super().__init__(*args, **kwargs)
         if 'place_id' in kwargs:
             self.place_id = kwargs['place_id']
         if 'user_id' in kwargs:
