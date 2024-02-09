@@ -2,6 +2,7 @@
 """amenity.py"""
 from models.base_model import BaseModel
 
+
 class Amenity(BaseModel):
     """
     The class Amenity inherit from Basemodel
@@ -17,4 +18,3 @@ class Amenity(BaseModel):
         super().__init__(*args, **kwargs)
         if 'name' in kwargs:
             self.name = ['name']
-        
