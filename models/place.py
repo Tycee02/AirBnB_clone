@@ -2,6 +2,7 @@
 """place.py"""
 from models.base_model import BaseModel
 
+
 class Place(BaseModel):
     """
     The class Place inherit from Basemodel
@@ -43,4 +44,3 @@ class Place(BaseModel):
             self.longitude = kwargs['longitude']
         if 'amenity_ids' in kwargs:
             self.amenity_ids = kwargs['amenity_ids']
-        
