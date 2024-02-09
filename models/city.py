@@ -2,6 +2,7 @@
 """City.py"""
 from models.base_model import BaseModel
 
+
 class City(BaseModel):
     """
     The class city inherit from Basemodel
@@ -19,4 +20,3 @@ class City(BaseModel):
             self.state_id = kwargs['state_id']
         if 'name' in kwargs:
             self.name = kwargs['name']
-        
