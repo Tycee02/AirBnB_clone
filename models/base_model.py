@@ -70,13 +70,9 @@ class BaseModel:
         # Check if the created_at and update_at attrs exists and format the
         # date to ISO format
         if "created_at" in obj_dict:
-            obj_dict["created_at"] = obj_dict["created_at"].strftime(
-                "%Y-%m-%dT%H:%M:%S.%f"
-            )
+            obj_dict["created_at"] = obj_dict["created_at"].isoformat()
         if "updated_at" in obj_dict:
-            obj_dict["updated_at"] = obj_dict["updated_at"].strftime(
-                "%Y-%m-%dT%H:%M:%S.%f"
-            )
+            obj_dict["updated_at"] = obj_dict["updated_at"].isoformat()
         obj_dict["__class__"] = self.__class__.__name__
 
         # Return the a dictionary with the class name and all attrs
