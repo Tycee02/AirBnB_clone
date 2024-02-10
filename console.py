@@ -24,6 +24,10 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing when empty line"""
         pass
 
+    def emptyline(self):
+        """Overrides default emptyline method"""
+        pass
+
     def do_EOF(self, arg):
         """Close Interpreter and saves data, [CTR + D]"""
         print("")
@@ -172,6 +176,17 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_update(self, arg):
+        """Updates an instance based on the class name and id by
+        adding or updating an attribute, and saves the changes
+        into the JSON file.
+
+        Args:
+            arg (str): A string containing the class name,
+            instance id, attribute name, and attribute value.
+        Example:
+            $ update BaseModel 1234-1234-1234 email "airbnb@mail.com"
+        """
+
         argv = shlex.split(arg)
         print(argv)
 
