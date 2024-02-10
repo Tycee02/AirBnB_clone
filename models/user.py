@@ -19,7 +19,7 @@ class User(BaseModel):
         Initialize the User with *args and **kwargs
         """
 
-        super().__init__(*args. **kwargs)
+        super().__init__(*args, **kwargs)
         if 'email' in kwargs:
             self.email = kwargs['email']
         if 'password' in kwargs:

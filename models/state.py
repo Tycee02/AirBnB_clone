@@ -10,11 +10,11 @@ class State(BaseModel):
 
     name = ''
 
-    def __init__.(self, *args, **kwargs)
-    """
-    Initialize the user with *args and **kwargs
-    """
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize the user with *args and **kwargs
+        """
 
-    super().__init__(*args, **kwargs)
-    if 'name' in kwargs:
-        self.name = kwargs['name']
+        super().__init__(*args, **kwargs)
+        if 'name' in kwargs:
+            self.name = kwargs['name']

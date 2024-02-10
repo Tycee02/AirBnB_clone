@@ -26,8 +26,8 @@ class BaseModel:
 
         if hasattr(self, "created_at") and type(self.created_at) is str:
             self.created_at = datetime.strptime(kwargs["created_at"], time)
-        if hasattr(self, "updated_at") and type(self.created_at) is str:
-            self.created_at = datetime.strptime(kwargs["updated_at"], time)
+        if hasattr(self, "updated_at") and type(self.updated_at) is str:
+            self.updated_at = datetime.strptime(kwargs["updated_at"], time)
         else:
             # Create a new Instance
             self.id = str(uuid.uuid4())

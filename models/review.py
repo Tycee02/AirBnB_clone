@@ -12,7 +12,7 @@ class Review(BaseModel):
     user_id = ''
     text = ''
 
-    def __init__(self. *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initializing with args and kwargs
         """

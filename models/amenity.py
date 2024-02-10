@@ -10,7 +10,7 @@ class Amenity(BaseModel):
 
     name = ''
 
-    def __init__.(self. *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Initialing with args and kwargs
         """
