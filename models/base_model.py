@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""Base Model class"""
+"""
+Base Model class
+"""
 
 from datetime import datetime
 import models
