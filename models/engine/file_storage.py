@@ -32,7 +32,7 @@ class FileStorage:
 
     def all(self):
         """Method to returns all objects created"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Method to set new object to storage"""
@@ -40,21 +40,21 @@ class FileStorage:
             # Create the key <obj class name>.id
             key = obj.__class__.__name__ + "." + obj.id
             # Save the object in the Dictionary
-            self.__objects[key] = obj
+            FileStorage.__objects[key] = obj
 
     def save(self):
         """Method to serialize and save a JSON to file"""
         json_obj = {}
-        for key in self.__objects:
-            json_obj[key] = self.__objects[key].to_dict()
+        for key in FileStorage.__objects:
+            json_obj[key] = FileStorage.__objects[key].to_dict()
 
-        with open(self.__file_path, "w") as f:
+        with open(FileStorage.__file_path, "w") as f:
             json.dump(json_obj, f)
 
     def reload(self):
         """Method to deserialize JSON from file"""
         try:
-            with open(self.__file_path, "r") as f:
+            with open(FileStorage.__file_path, "r") as f:
                 json_obj = json.load(f)
 
             for key in json_obj:
@@ -66,7 +66,7 @@ class FileStorage:
                 # dictionary
                 obj = obj_class(**obj_dict)
                 # Add the object to the __objects
-                self.__objects[key] = obj
+                FileStorage.__objects[key] = obj
 
-        except Exception as e:
-            pass
+        except FileNotFoundError:
+            return
