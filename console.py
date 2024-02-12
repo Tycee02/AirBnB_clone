@@ -4,25 +4,33 @@ This is the console base for the airbnb
 """
 
 import cmd
-import sys
-import os
-import json
-import shlex
-from models.base_model import BaseModel
 from models import storage
+import shlex
+import json
+
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """Holberton command prompt to access models data"""
 
-    intro = "Welcome to the AirBnB Console"
     prompt = "(hbnb) "
 
-    CLASSES = {"BaseModel": BaseModel}
-
-    def do_nothing(self, arg):
-        """Do nothing when empty line"""
-        pass
+    CLASSES = {
+        "BaseModel": BaseModel,
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review,
+    }
 
     def emptyline(self):
         """Overrides default emptyline method"""
@@ -34,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_quit(self, arg):
-        """Close de Interpreter and saves data"""
+        """Quit command to exit the program"""
         return True
 
     def do_create(self, arg):
@@ -103,41 +111,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
-    def do_all(self, arg):
-        """
-        Prints string representations of all instances based on the class
-        name or all instances if no class name is provided.
-
-        Args:
-            arg (str, optional): A string containing the class name. If
-            provided, prints string representations of all instances of
-            that class. If not provided, prints string representations
-            of all instances of all classes.
-
-        Example:
-            $ all BaseModel
-            $ all
-        """
-        argv = shlex.split(arg)
-        storage.reload()
-        objects = storage.all()
-        obj_list = []
-
-        if not arg:
-            for key in objects.keys():
-                obj_list.append(str(objects[key]))
-            print(json.dumps(obj_list))
-            return
-
-        if len(argv) >= 1 and argv[0] in HBNBCommand.CLASSES:
-            for key in objects.keys():
-                cls = key.split(".")
-                if argv[0] == cls[0]:
-                    obj_list.append(str(objects[key]))
-            print(json.dumps(obj_list))
-        else:
-            print("** class doesn't exist **")
-
     def do_destroy(self, arg):
         """
         Deletes an instance based on the class name
@@ -175,6 +148,41 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
 
+    def do_all(self, arg):
+        """
+        Prints string representations of all instances based on the class
+        name or all instances if no class name is provided.
+
+        Args:
+            arg (str, optional): A string containing the class name. If
+            provided, prints string representations of all instances of
+            that class. If not provided, prints string representations
+            of all instances of all classes.
+
+        Example:
+            $ all BaseModel
+            $ all
+        """
+        argv = shlex.split(arg)
+        storage.reload()
+        objects = storage.all()
+        obj_list = []
+
+        if not arg:
+            for key in objects.keys():
+                obj_list.append(str(objects[key]))
+            print(json.dumps(obj_list))
+            return
+
+        if len(argv) >= 1 and argv[0] in HBNBCommand.CLASSES:
+            for key in objects.keys():
+                cls = key.split(".")
+                if argv[0] == cls[0]:
+                    obj_list.append(str(objects[key]))
+            print(json.dumps(obj_list))
+        else:
+            print("** class doesn't exist **")
+
     def do_update(self, arg):
         """Updates an instance based on the class name and id by
         adding or updating an attribute, and saves the changes
@@ -188,7 +196,6 @@ class HBNBCommand(cmd.Cmd):
         """
 
         argv = shlex.split(arg)
-        print(argv)
 
         if not arg:
             print("** class name missing **")
@@ -220,13 +227,14 @@ class HBNBCommand(cmd.Cmd):
             return
 
         my_obj = objects[key]
-        print(hasattr(my_obj, argv[2]))
 
-    def do_shell(self, arg):
-        "Run shell command"
-        output = os.popen(arg).read()
-        print(output)
-        self.last_output = output
+        if hasattr(my_obj, argv[2]):
+            data_type = type(getattr(my_obj, argv[2]))
+            setattr(my_obj, argv[2], data_type(argv[3]))
+        else:
+            setattr(my_obj, argv[2], argv[3])
+
+        storage.save()
 
 
 if __name__ == "__main__":
