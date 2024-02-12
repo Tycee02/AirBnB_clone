@@ -60,7 +60,6 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertNotIn(None, bm.__dict__.values())
 
 
-
 class TestBaseModel_save(unittest.TestCase):
     """Unittests for testing save method of the BaseModel class."""
 
