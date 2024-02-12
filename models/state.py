@@ -8,13 +8,10 @@ class State(BaseModel):
     The state class inherit from Basemodel
     """
 
-    name = ''
+    name = ""
 
     def __init__(self, *args, **kwargs):
         """
         Initialize the user with *args and **kwargs
         """
-
         super().__init__(*args, **kwargs)
-        if 'name' in kwargs:
-            self.name = kwargs['name']
